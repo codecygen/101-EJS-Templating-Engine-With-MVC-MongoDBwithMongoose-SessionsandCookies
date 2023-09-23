@@ -19,7 +19,7 @@ exports.getProducts = async (req, res, next) => {
   // server will understand "allProducts" as allProducts.ejs because
   // it is indicated in index.js like that, html is the root folder for all
   // ejs files.
-  res.render("productList", {
+  res.render("products/index", {
     pagePath: "/products",
     productList: allProducts,
     renderTitle: "All Products",
@@ -69,7 +69,7 @@ exports.getProduct = async (req, res, next) => {
 
   const foundProduct = await dbProductOperation.getOneProduct(productId);
 
-  res.render("productDetail", {
+  res.render("products/details", {
     pagePath: "/products",
     renderTitle: `${foundProduct.productName} Details`,
     product: foundProduct,
