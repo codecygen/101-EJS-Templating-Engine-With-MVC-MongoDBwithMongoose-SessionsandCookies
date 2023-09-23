@@ -4,5 +4,13 @@
 <body>
     <%- include('includes/nav.ejs') %>
 
-    <div>Aras</div>
+    <form action="/login" class="centered" method="POST">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="entered-username">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="entered-password">
+
+        <button class="btn" type="submit">Login</button>
+    </form>
 </body>
