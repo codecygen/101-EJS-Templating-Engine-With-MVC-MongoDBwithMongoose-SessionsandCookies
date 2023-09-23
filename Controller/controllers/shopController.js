@@ -19,7 +19,7 @@ exports.getProducts = async (req, res, next) => {
   // server will understand "allProducts" as allProducts.ejs because
   // it is indicated in index.js like that, html is the root folder for all
   // ejs files.
-  res.render("shop/productList", {
+  res.render("productList", {
     pagePath: "/products",
     productList: allProducts,
     renderTitle: "All Products",
@@ -30,7 +30,7 @@ exports.getProducts = async (req, res, next) => {
 exports.getIndex = async (req, res, next) => {
   const products = await dbProductOperation.getAllProducts();
 
-  res.render("shop/index", {
+  res.render("index", {
     pagePath: "/",
     productList: products,
     renderTitle: "Shop",
@@ -44,7 +44,7 @@ exports.getCart = async (req, res, next) => {
   const [cartProductList, cartTotalPrice, userCartDB] =
     await dbCartOperation.getCartProducts(currentUser);
 
-  res.render("shop/cart", {
+  res.render("cart", {
     pagePath: "/cart",
     renderTitle: "Your Cart",
     cartProducts: cartProductList,
@@ -69,7 +69,7 @@ exports.getProduct = async (req, res, next) => {
 
   const foundProduct = await dbProductOperation.getOneProduct(productId);
 
-  res.render("shop/productDetail", {
+  res.render("productDetail", {
     pagePath: "/products",
     renderTitle: `${foundProduct.productName} Details`,
     product: foundProduct,
@@ -89,7 +89,7 @@ exports.postDeleteCartItem = async (req, res, next) => {
 exports.getAllUsers = async (req, res, next) => {
   const allUsers = await dbAdminOperation.getAllUsers();
 
-  res.render("shop/auth", {
+  res.render("auth", {
     pagePath: "/auth",
     renderTitle: "Auth",
     userList: allUsers,
@@ -114,7 +114,7 @@ exports.getOrders = async (req, res, next) => {
 
   const orderList = await dbOrderOperation.getOrders(loggedInUser);
 
-  res.render("shop/orders", {
+  res.render("orders", {
     pagePath: "/orders",
     renderTitle: "Orders",
     orderList,
