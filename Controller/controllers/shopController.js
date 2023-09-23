@@ -89,9 +89,9 @@ exports.postDeleteCartItem = async (req, res, next) => {
 exports.getAllUsers = async (req, res, next) => {
   const allUsers = await dbAdminOperation.getAllUsers();
 
-  res.render("shop/login", {
-    pagePath: "/login",
-    renderTitle: "Login",
+  res.render("shop/auth", {
+    pagePath: "/auth",
+    renderTitle: "Auth",
     userList: allUsers,
     selectedUser: res.locals.selectedUser,
   });

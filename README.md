@@ -78,3 +78,6 @@ const user = await User.findById(userId).select("userName", "productId", "produc
 ```
 
 **Solution:** it means here that productId is directing us to "_id" field of Product Model. Basically it searches through User model and tries to find User._id === userId. Also populates the productId by finding Product._id === productId then puts all product details under that user as well.
+
+# Sessions and Cookies:
+## Cookies:

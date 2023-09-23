@@ -32,7 +32,9 @@ app.set("views", "View/html");
 
 const adminRoute = require("./Controller/routes/adminRoute");
 const shopRoute = require("./Controller/routes/shopRoute");
+const authRoute = require("./Controller/routes/authRoute");
 const NoRoute = require("./Controller/routes/NoRoute");
+
 
 // Express-Session-Keep-Cookie-in-req.session
 // This is used to keep session for chosen admin
@@ -65,8 +67,8 @@ app.use(async (req, res, next) => {
 // Combines to the Route /admin/add-product
 // Instead of app.use and router file, we could have also used app.get
 app.use("/admin", adminRoute);
-
 app.use(shopRoute);
+app.use(authRoute);
 
 // Unspecified routes, 404 page
 // Instead of app.use and router file, we could have also used app.get

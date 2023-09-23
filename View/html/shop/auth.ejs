@@ -4,7 +4,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
 
-    <form action="/login" class="centered" method="POST">
+    <form action="/auth" class="centered" method="POST">
         <label for="login">Login with your username</label>
         <select name="logged-in-user-id" id="login">
             <% if(userList.length > 0) { %>
