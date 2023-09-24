@@ -165,3 +165,8 @@ exports.postLoginPage = async (req, res, next) => {
 
 Remember, not all browsers support all attributes, and some attributes may have restrictions or behave differently in certain scenarios. Always refer to the relevant specifications and consider the compatibility requirements for your specific use case.
 ```
+
+## Sessions:
+Unlike cookies, sessions are stored in back end.
+
+![methods that work](https://github.com/codecygen/101-EJS-Templating-Engine-With-MVC-MongoDBwithMongoose/blob/main/Images/164075580-a4e6fa11-cf0f-4f5f-9265-d065f6456a95.png?raw=true)
