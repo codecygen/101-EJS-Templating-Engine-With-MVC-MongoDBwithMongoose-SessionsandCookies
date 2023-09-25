@@ -171,3 +171,71 @@ Unlike cookies, sessions are stored in back end.
 
 ![how session works PNG](https://github.com/codecygen/103-EJS-Templating-Engine-With-MVC-MongoDBwithMongoose-SessionsandCookies/blob/main/Images/Screenshot%20from%202023-09-24%2015-02-30.png)
 
+To intialize sessions, use these in index.js
+
+```javascript
+const session = require("express-session");
+
+app.use(
+  session({
+    secret: process.env.EXPRESS_SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+```
+
+Then in a post based controller function, we need to use
+```javascript
+req.session.anyName = "yes!";
+```
+
+then get based controller function, we can get it back
+```javascript
+console.log(req.session.anyName);
+// Output: yes!
+```
+
+finally, for templating engines, res.locals is a feature provided by Express.js. Remember this will not work for libraries like ReactJS.
+Firtly, we need to set it in a middleware called populateSelectedUser.js
+
+```javascript
+// Express-Session-Keep-Cookie-in-req.session
+const populateSelectedUser = (req, res, next) => {
+
+  const selectedUser = {
+    userId: req.session.userId,
+    userName: req.session.userName,
+    userEmail: req.session.userEmail,
+    adminId: req.session.adminId,
+  };
+
+  res.locals.selectedUser = selectedUser;
+  next();
+};
+
+module.exports = populateSelectedUser;
+```
+
+Then we need to initiate it in the shopRoute.js
+```javascript
+router.use(populateSelectedUser);
+```
+
+finally inside the shopController.js EJS template can access to res.locals values.
+
+```javascript
+exports.getAllUsers = async (req, res, next) => {
+  const allUsers = await dbAdminOperation.getAllUsers();
+
+  res.render("auth", {
+    pagePath: "/auth",
+    renderTitle: "Auth",
+    userList: allUsers,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
+  });
+};
+```
