@@ -37,7 +37,10 @@ exports.getProducts = async (req, res, next) => {
     pagePath: "/admin/products",
     productList: products,
     renderTitle: "Admin Products",
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -62,7 +65,10 @@ exports.editProduct = async (req, res, next) => {
     pagePath: "/admin/edit-product",
     editing: isEditMode,
     product: foundProduct,
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -81,7 +87,10 @@ exports.postEditProduct = async (req, res, next) => {
     productDesc: req.body.newProductDescription,
     productPrice: req.body.newProductPrice,
     productImg: req.body.newProductImage,
-    adminId: res.locals.selectedUser.adminId,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to adminId that is in res.locals
+    // adminId: res.locals.selectedUser.adminId,
   };
 
   await dbProductOperation.updateOneProduct(updatedProduct);

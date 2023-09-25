@@ -34,7 +34,10 @@ exports.getIndex = async (req, res, next) => {
     pagePath: "/",
     productList: products,
     renderTitle: "Shop",
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -49,7 +52,10 @@ exports.getCart = async (req, res, next) => {
     renderTitle: "Your Cart",
     cartProducts: cartProductList,
     cartPrice: cartTotalPrice,
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -73,7 +79,10 @@ exports.getProduct = async (req, res, next) => {
     pagePath: "/products",
     renderTitle: `${foundProduct.productName} Details`,
     product: foundProduct,
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -93,7 +102,10 @@ exports.getAllUsers = async (req, res, next) => {
     pagePath: "/auth",
     renderTitle: "Auth",
     userList: allUsers,
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
