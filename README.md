@@ -7,8 +7,13 @@
 - Create .env file and provide the given content.
 
 ```javascript
+# FOR MONGODB ATLAS
 URL =
   "mongodb+srv://UserName:UserPass@ClusterName.b99wetu.mongodb.net/DBName?retryWrites=true&w=majority";
+
+# FOR LOCAL MONGODB
+# URL="mongodb://username:password@0.0.0.0:27017/shoppingDB"
+
 EXPRESS_SESSION_KEY = "your-secret-key";
 ```
 
