@@ -169,4 +169,5 @@ Remember, not all browsers support all attributes, and some attributes may have 
 ## Sessions:
 Unlike cookies, sessions are stored in back end.
 
-![methods that work](https://github.com/codecygen/103-EJS-Templating-Engine-With-MVC-MongoDBwithMongoose-SessionsandCookies/blob/main/Images/Screenshot%20from%202023-09-24%2015-02-30.png)
+![how session works PNG](https://github.com/codecygen/103-EJS-Templating-Engine-With-MVC-MongoDBwithMongoose-SessionsandCookies/blob/main/Images/Screenshot%20from%202023-09-24%2015-02-30.png)
+
