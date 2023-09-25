@@ -190,13 +190,13 @@ Then in a post based controller function, we need to use
 req.session.anyName = "yes!";
 ```
 
-then get based controller function, we can get it back
+Next, get based controller function, we can get it back
 ```javascript
 console.log(req.session.anyName);
 // Output: yes!
 ```
 
-finally, for templating engines, res.locals is a feature provided by Express.js. Remember this will not work for libraries like ReactJS.
+After that, for templating engines, res.locals is a feature provided by Express.js. Remember this will not work for libraries like ReactJS.
 Firtly, we need to set it in a middleware called populateSelectedUser.js
 
 ```javascript
@@ -222,7 +222,7 @@ Then we need to initiate it in the shopRoute.js
 router.use(populateSelectedUser);
 ```
 
-finally inside the shopController.js EJS template can access to res.locals values.
+Finally inside the shopController.js EJS template can access to res.locals values.
 
 ```javascript
 exports.getAllUsers = async (req, res, next) => {
