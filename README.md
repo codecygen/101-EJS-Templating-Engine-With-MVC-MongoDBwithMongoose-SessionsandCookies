@@ -202,7 +202,7 @@ console.log(req.session.anyName);
 ```
 
 After that, for templating engines, res.locals is a feature provided by Express.js. Remember this will not work for libraries like ReactJS.
-Firtly, we need to set it in a middleware called populateSelectedUser.js
+Firstly, we need to set it in a middleware called populateSelectedUser.js
 
 ```javascript
 // Express-Session-Keep-Cookie-in-req.session
