@@ -12,6 +12,10 @@ const dbOrderOperation = require("../../Model/operations/dbOrderOperation");
 // "/display/products"
 
 exports.getProducts = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+
   const allProducts = await dbProductOperation.getAllProducts();
 
   // This means render productList.ejs
@@ -28,6 +32,10 @@ exports.getProducts = async (req, res, next) => {
 };
 
 exports.getIndex = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+
   const products = await dbProductOperation.getAllProducts();
 
   res.render("index", {
@@ -42,6 +50,10 @@ exports.getIndex = async (req, res, next) => {
 };
 
 exports.getCart = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+
   const currentUser = await dbAdminOperation.getOneUser(req.session.userId);
 
   const [cartProductList, cartTotalPrice, userCartDB] =
@@ -71,6 +83,10 @@ exports.postCart = async (req, res, next) => {
 };
 
 exports.getProduct = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    res.redirect("/login");
+  }
+
   const productId = req.params.productId;
 
   const foundProduct = await dbProductOperation.getOneProduct(productId);
@@ -118,10 +134,14 @@ exports.postSelectedUser = async (req, res, next) => {
   req.session.userEmail = loggedinUser.userEmail;
   req.session.adminId = loggedinUser.adminId;
 
-  res.redirect("/login");
+  res.redirect("/auth");
 };
 
 exports.getOrders = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+  
   const loggedInUser = res.locals.selectedUser;
 
   const orderList = await dbOrderOperation.getOrders(loggedInUser);

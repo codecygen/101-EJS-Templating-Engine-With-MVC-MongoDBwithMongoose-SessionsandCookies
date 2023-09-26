@@ -2,11 +2,18 @@ const dbProductOperation = require("../../Model/operations/dbProductOperation");
 const dbAdminOperation = require("../../Model/operations/dbAdminOperation");
 
 exports.getAddProduct = (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+
   res.render("admin/addEditProduct", {
     renderTitle: "Add Product",
     pagePath: "/admin/add-product",
     editing: false,
-    selectedUser: res.locals.selectedUser,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
@@ -18,7 +25,10 @@ exports.postAddProduct = async (req, res, next) => {
     productImg: req.body.newProductImage,
     // Express-Session-Keep-Cookie-in-req.session
     // here, we can assign req.session from everywhere because it is a cookie file.
-    adminId: res.locals.selectedUser.adminId,
+    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // because it is stored in res.locals, res.render template
+    // can reach to selectedUser that is in res.locals
+    // adminId: res.locals.selectedUser.adminId,
   };
 
   await dbProductOperation.addNewProduct(newProduct);
@@ -27,6 +37,10 @@ exports.postAddProduct = async (req, res, next) => {
 };
 
 exports.getProducts = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+
   let products = false;
 
   if (req.session.adminId) {
@@ -37,7 +51,7 @@ exports.getProducts = async (req, res, next) => {
     pagePath: "/admin/products",
     productList: products,
     renderTitle: "Admin Products",
-    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // router.use(); // this middleware populates res.locals
     // because it is stored in res.locals, res.render template
     // can reach to selectedUser that is in res.locals
     // selectedUser: res.locals.selectedUser,
@@ -65,7 +79,7 @@ exports.editProduct = async (req, res, next) => {
     pagePath: "/admin/edit-product",
     editing: isEditMode,
     product: foundProduct,
-    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // router.use(); // this middleware populates res.locals
     // because it is stored in res.locals, res.render template
     // can reach to selectedUser that is in res.locals
     // selectedUser: res.locals.selectedUser,
@@ -87,7 +101,7 @@ exports.postEditProduct = async (req, res, next) => {
     productDesc: req.body.newProductDescription,
     productPrice: req.body.newProductPrice,
     productImg: req.body.newProductImage,
-    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // router.use(); // this middleware populates res.locals
     // because it is stored in res.locals, res.render template
     // can reach to adminId that is in res.locals
     // adminId: res.locals.selectedUser.adminId,

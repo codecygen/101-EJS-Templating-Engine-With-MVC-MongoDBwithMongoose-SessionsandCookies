@@ -56,15 +56,12 @@ app.use(
 
 // Express-Session-Keep-Cookie-in-req.session
 app.use(async (req, res, next) => {
-  let allUsers;
 
   if (!req.session.userId) {
-    allUsers = await dbAdminOperation.getAllUsers();
-
-    req.session.userId = allUsers[0]._id;
-    req.session.userName = allUsers[0].userName;
-    req.session.userEmail = allUsers[0].userEmail;
-    req.session.adminId = allUsers[0].adminId;
+    req.session.userId = null;
+    req.session.userName = "No One";
+    req.session.userEmail = null;
+    req.session.adminId = null;
   }
 
   next();

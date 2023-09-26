@@ -219,12 +219,12 @@ const populateSelectedUser = (req, res, next) => {
   next();
 };
 
-module.exports = populateSelectedUser;
+module.exports = ;
 ```
 
 Then we need to initiate it in the shopRoute.js
 ```javascript
-router.use(populateSelectedUser);
+router.use();
 ```
 
 Finally inside the shopController.js EJS template can access to res.locals values.
@@ -237,7 +237,7 @@ exports.getAllUsers = async (req, res, next) => {
     pagePath: "/auth",
     renderTitle: "Auth",
     userList: allUsers,
-    // router.use(populateSelectedUser); // this middleware populates res.locals
+    // router.use(); // this middleware populates res.locals
     // because it is stored in res.locals, res.render template
     // can reach to selectedUser that is in res.locals
     // selectedUser: res.locals.selectedUser,

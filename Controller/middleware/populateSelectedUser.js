@@ -1,6 +1,5 @@
 // Express-Session-Keep-Cookie-in-req.session
 const populateSelectedUser = (req, res, next) => {
-
   const selectedUser = {
     userId: req.session.userId,
     userName: req.session.userName,
