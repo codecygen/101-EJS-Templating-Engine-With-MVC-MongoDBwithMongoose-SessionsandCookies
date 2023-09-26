@@ -8,6 +8,8 @@ const mongoose = require("mongoose");
 // This is used to keep session for chosen admin
 const session = require("express-session");
 
+const MongoDBStore = require("connect-mongodb-session")(session);
+
 // Mongoose-Connect-Database
 // Allows .env file to be used
 require("dotenv").config();
@@ -16,6 +18,11 @@ require("dotenv").config();
 const dbAdminOperation = require("./Model/operations/dbAdminOperation");
 
 const app = express();
+
+const store = new MongoDBStore({
+  uri: process.env.URL,
+  collection: "sessions"
+});
 
 // Express body parsing
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -41,6 +48,7 @@ const NoRoute = require("./Controller/routes/NoRoute");
 app.use(
   session({
     secret: process.env.EXPRESS_SESSION_KEY,
+    store: store,
     resave: false,
     saveUninitialized: false,
   })

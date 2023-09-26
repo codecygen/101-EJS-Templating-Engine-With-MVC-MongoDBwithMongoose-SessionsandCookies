@@ -244,3 +244,44 @@ exports.getAllUsers = async (req, res, next) => {
   });
 };
 ```
+
+## Saving Sessions to MongoDB:
+The package needed is **connect-mongodb-session**. Codes are given down below on how to make it work. You can also check this in from the npm package.
+
+```javascript
+var express = require('express');
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
+
+require("dotenv").config();
+
+var app = express();
+var store = new MongoDBStore(
+  {
+    uri: process.env.URL,
+    databaseName: 'connect_mongodb_session_test',
+    collection: 'sessions'
+  },
+  function(error) {
+    // Should have gotten an error
+  });
+
+store.on('error', function(error) {
+  // Also get an error here
+});
+
+app.use(session({
+  secret: 'This is a secret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  // Boilerplate options, see:
+  // * https://www.npmjs.com/package/express-session#resave
+  // * https://www.npmjs.com/package/express-session#saveuninitialized
+  resave: true,
+  saveUninitialized: true
+}));
+```
+
+After this, whenever you store any info in req.session, it will automatically be saved into database to "sessions" collection.

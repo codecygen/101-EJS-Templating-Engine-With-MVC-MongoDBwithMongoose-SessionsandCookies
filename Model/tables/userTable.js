@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
+    password: {
+      type: String,
+      required: true,
+    },
+
     adminId: mongoose.Types.ObjectId,
 
     userCart: [

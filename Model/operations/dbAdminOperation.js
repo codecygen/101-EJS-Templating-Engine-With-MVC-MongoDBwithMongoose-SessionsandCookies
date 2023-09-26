@@ -13,20 +13,24 @@ const checkAndCreateAdminsAndUsers = async () => {
     {
       userName: "Aras",
       userEmail: "aras@gmail.com",
+      password: "Aras",
       adminId: new mongoose.Types.ObjectId(),
     },
     {
       userName: "Jason",
       userEmail: "jason@gmail.com",
+      password: "Jason",
       adminId: new mongoose.Types.ObjectId(),
     },
     {
       userName: "Alice",
       userEmail: "alice@gmail.com",
+      password: "Alice",
     },
     {
       userName: "Amanda",
       userEmail: "amanda@gmail.com",
+      password: "Amanda",
     },
   ];
 
