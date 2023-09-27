@@ -206,6 +206,15 @@ req.session.destroy((err) => {
 });
 ```
 
+There is also a method that might be used if you want more control over your res.redirect which is save method for sessions.
+
+```javascript
+req.session.save((err) => {
+  console.error(err);
+  res.redirect("/");
+});
+```
+
 Next, get based controller function, we can get it back
 
 ```javascript
