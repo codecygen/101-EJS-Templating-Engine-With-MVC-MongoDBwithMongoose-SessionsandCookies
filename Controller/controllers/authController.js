@@ -31,7 +31,7 @@ exports.postLoginPage = async (req, res, next) => {
   if (!foundUser) {
     return;
   }
-  
+
   req.session.userId = foundUser._id;
   req.session.userName = foundUser.userName;
   req.session.userEmail = foundUser.userEmail;
@@ -52,4 +52,13 @@ exports.postLoginPage = async (req, res, next) => {
   // It will still stay in browser but will be deleted by browser eventually
   // const expirySecond = 10;
   // res.setHeader("Set-Cookie", `tenSeconds=true; Max-Age=${expirySecond}`);
+};
+
+exports.postLogout = async (req, res, next) => {
+  req.session.userId = null;
+  req.session.userName = "No One";
+  req.session.userEmail = null;
+  req.session.adminId = null;
+  
+  res.redirect("/login");
 };
