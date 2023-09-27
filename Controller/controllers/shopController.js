@@ -111,32 +111,6 @@ exports.postDeleteCartItem = async (req, res, next) => {
   res.redirect("/cart");
 };
 
-exports.getAllUsers = async (req, res, next) => {
-  const allUsers = await dbAdminOperation.getAllUsers();
-
-  res.render("auth", {
-    pagePath: "/auth",
-    renderTitle: "Auth",
-    userList: allUsers,
-    // router.use(populateSelectedUser); // this middleware populates res.locals
-    // because it is stored in res.locals, res.render template
-    // can reach to selectedUser that is in res.locals
-    // selectedUser: res.locals.selectedUser,
-  });
-};
-
-exports.postSelectedUser = async (req, res, next) => {
-  const loggedinUserId = req.body["logged-in-user-id"];
-  const loggedinUser = await dbAdminOperation.getOneUser(loggedinUserId);
-
-  req.session.userId = loggedinUser._id;
-  req.session.userName = loggedinUser.userName;
-  req.session.userEmail = loggedinUser.userEmail;
-  req.session.adminId = loggedinUser.adminId;
-
-  res.redirect("/auth");
-};
-
 exports.getOrders = async (req, res, next) => {
   if (res.locals.selectedUser.userId === null) {
     return res.redirect("/login");
