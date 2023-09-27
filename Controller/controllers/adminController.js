@@ -61,6 +61,10 @@ exports.getProducts = async (req, res, next) => {
 // editProduct and postEditProduct are responsible of
 // "Edit" button.
 exports.editProduct = async (req, res, next) => {
+  if (res.locals.selectedUser.userId === null) {
+    return res.redirect("/login");
+  }
+  
   const productId = req.params.productId;
 
   const editMode = req.query.edit;
