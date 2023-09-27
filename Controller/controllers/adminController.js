@@ -23,12 +23,7 @@ exports.postAddProduct = async (req, res, next) => {
     productDesc: req.body.newProductDescription,
     productPrice: req.body.newProductPrice,
     productImg: req.body.newProductImage,
-    // Express-Session-Keep-Cookie-in-req.session
-    // here, we can assign req.session from everywhere because it is a cookie file.
-    // router.use(populateSelectedUser); // this middleware populates res.locals
-    // because it is stored in res.locals, res.render template
-    // can reach to selectedUser that is in res.locals
-    // adminId: res.locals.selectedUser.adminId,
+    adminId: res.locals.selectedUser.adminId,
   };
 
   await dbProductOperation.addNewProduct(newProduct);
@@ -108,7 +103,7 @@ exports.postEditProduct = async (req, res, next) => {
     // router.use(); // this middleware populates res.locals
     // because it is stored in res.locals, res.render template
     // can reach to adminId that is in res.locals
-    // adminId: res.locals.selectedUser.adminId,
+    adminId: res.locals.selectedUser.adminId,
   };
 
   await dbProductOperation.updateOneProduct(updatedProduct);

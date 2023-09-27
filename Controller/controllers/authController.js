@@ -13,7 +13,7 @@ exports.getLoginPage = async (req, res, next) => {
   res.render("login", {
     pagePath: "/login",
     renderTitle: "Login",
-    selectedUser: res.locals.selectedUser,
+    // selectedUser: res.locals.selectedUser,
   });
 };
 
