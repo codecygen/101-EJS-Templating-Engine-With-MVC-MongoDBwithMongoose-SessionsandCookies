@@ -47,6 +47,15 @@ const getOneUser = async (userId) => {
   return foundUser;
 };
 
+const checkLogin = async (username, password) => {
+  const foundUser = await Tables.UserTable.checkUserLogin(
+    username,
+    password
+  );
+
+  return foundUser;
+};
+
 const getAdminProducts = async (adminId) => {
   const adminProducts = await Tables.ProductTable.adminProducts(adminId);
   return adminProducts;
@@ -56,5 +65,6 @@ module.exports = {
   checkAndCreateAdminsAndUsers,
   getAllUsers,
   getOneUser,
+  checkLogin,
   getAdminProducts,
 };

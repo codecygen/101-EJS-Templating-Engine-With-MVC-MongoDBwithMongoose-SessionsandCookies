@@ -4,10 +4,10 @@ exports.getLoginPage = async (req, res, next) => {
   // Gets cookie from front end with Get request for the page.
   // req.get("Cookie") will only return not expired cookies
   // if (req.get("Cookie")) {
-    // console.log(req.get("Cookie"));
-    // console.log(req.cookies);
-    // Output:
-    // connect.sid=s%3AEc9Ke1LRkapkR1oCWsJhLAQ135sZJvip.FOzakumJ0zFCgJNOUdqtiG0j%2BCyRLGLTF0qrw5Rm88E; loggedIn=true
+  // console.log(req.get("Cookie"));
+  // console.log(req.cookies);
+  // Output:
+  // connect.sid=s%3AEc9Ke1LRkapkR1oCWsJhLAQ135sZJvip.FOzakumJ0zFCgJNOUdqtiG0j%2BCyRLGLTF0qrw5Rm88E; loggedIn=true
   // }
 
   res.render("login", {
@@ -23,10 +23,14 @@ exports.postLoginPage = async (req, res, next) => {
     "entered-password": enteredPassword,
   } = req.body;
 
-  console.log(enteredUsername, enteredPassword);
+  const foundUser = await dbAdminOperation.checkLogin(
+    enteredUsername,
+    enteredPassword
+  );
 
-  req.session.isLoggedIn = true;
+  console.log(foundUser);
 
+  // req.session.isLoggedIn = true;
 
   // Sets cookie upon post request to the front end.
   // loggedIn=true

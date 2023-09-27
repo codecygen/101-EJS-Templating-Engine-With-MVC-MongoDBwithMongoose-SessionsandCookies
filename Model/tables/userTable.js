@@ -70,6 +70,15 @@ userSchema.statics.getSingleUser = async function (userId) {
   }
 };
 
+userSchema.statics.checkUserLogin = async function (userName, password) {
+  try {
+    const result = await this.findOne({ userName: userName, password: password });
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 userSchema.statics.updateCart = async function (currentUser, addedProduct) {
   let isInCart =
     currentUser.userCart.findIndex((entry) =>
@@ -127,7 +136,6 @@ userSchema.statics.removeCartItem = async function (userId, productId) {
 };
 
 userSchema.statics.removeAllCart = async function (userId) {
-
   try {
     await this.updateOne({ _id: userId }, { $set: { userCart: [] } });
   } catch (err) {
